@@ -6,6 +6,7 @@
 
 ``` bash
 # install dependencies
+git submodule update -i
 npm install
 
 # serve with hot reload at localhost:9080
@@ -18,6 +19,14 @@ npm run build
 # lint all JS/Vue component files in `src/`
 npm run lint
 
+
+# update vp_app
+cd src
+git pull origin master
+cd ..
+git add .
+git commit -m "appropriate message"
+git push
 ```
 
 ---

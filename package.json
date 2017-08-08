@@ -4,7 +4,12 @@
   "version": "0.0.0",
   "author": "yseki <yasuharu.seki@jp.sony.com>",
   "description": "Vue-Perroquet CDP app for Electron",
-  "license": null,
+  "license": "Apache-2.0",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CDP-Tokyo/vp_electron"
+  },
   "main": "./dist/electron/main.js",
   "scripts": {
     "build": "node .electron-vue/build.js",
@@ -23,8 +28,10 @@
     "postinstall": "npm run lint:fix"
   },
   "dependencies": {
+    "onsenui": "^2.5.2",
     "vue": "^2.3.3",
     "vue-electron": "^1.0.6",
+    "vue-onsenui": "^2.1.0",
     "vuex": "^2.3.1"
   },
   "devDependencies": {
