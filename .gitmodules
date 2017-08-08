@@ -1,0 +1,3 @@
+[submodule "src/renderer"]
+	path = src/renderer
+	url = git@github.com:CDP-Tokyo/vp_app.git
