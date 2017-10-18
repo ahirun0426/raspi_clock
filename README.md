@@ -20,6 +20,10 @@ npm run build
 npm run lint
 
 
+# If you found NPM_MODULE_VERSION error on developper tool, do below
+npm run electron-rebuild
+
+
 # update vp_app
 cd src
 git pull origin master
