@@ -1,0 +1,119 @@
+[
+  {
+    "id": "pmodule",
+    "DESCRIPTION": "/* It requires : 'name', 'store' for store, (file and method(optional)) for vmodel */",
+
+    "children": [ "pmodule_store", "pmodule_sample_page" ]
+  },
+  {
+    "id": "pmodule_store",
+    "targets": [
+      {
+        "filename": "pmodules/{{=it.name}}/index.ts",
+        "edittype": "file_copy",
+        "originalFile": "{{=it.store}}"
+      },
+      {
+        "filename": "Store/store.ts",
+        "edittype": "line",
+        "id": "pmodule_store_import",
+        "template": "import {{=it.name}} from '../pmodules/{{=it.name}}/';"
+      },
+      {
+        "filename": "Store/store.ts",
+        "edittype": "line",
+        "template": "{{=it.name}},"
+      },
+      {
+        "filename": "Store/store.ts",
+        "edittype": "line",
+        "id": "pmodule_store_actions",
+        "template": "{{~ it.actions :k}}{{=it.name}}_{{=k}}({dispatch, state}, value) {}, {{~}}"
+      }
+    ]
+  },
+  {
+    "id": "pmodule_sample_page",
+    "targets": [
+      {
+        "filename": "pmodules/{{=it.name}}/",
+        "edittype": "file_copy",
+        "originalFile": "{{=it.file}}"
+      },
+      {
+        "filename": "Pages/_SampleUI.vue",
+        "edittype": "line",
+        "id": "pmodule_sample_page_tag",
+        "template": "<{{=it.name}}{{=it.method}}{{? it.property_str}} {{=it.property_str}}{{?}} />"
+      },
+      {
+        "filename": "Pages/_SampleUI.vue",
+        "edittype": "line",
+        "id": "pmodule_sample_page_import",
+        "template": "import {{=it.name}}{{=it.method}} from '../pmodules/{{=it.name}}/{{?it.method}}{{=it.method}}{{??}}{{=it.name}}{{?}}.vue';"
+      },
+      {
+        "filename": "Pages/_SampleUI.vue",
+        "edittype": "line",
+        "id": "pmodule_sample_page_component",
+        "template": "{{=it.name}}{{=it.method}},"
+      }
+    ]
+  },
+  {
+    "id": "ppage",
+    "DESCRIPTION": "/* It requires : PageName and file */",
+
+    "children": ["ppage_pagecopy", "ppage_SideMenu", "ppage_SampleUI"]
+  },
+  {
+    "id": "ppage_pagecopy",
+    "targets": [
+      {
+        "filename": "ppages/{{=it.PageName}}/{{=it.file}}",
+        "edittype": "file_copy",
+        "originalFile": "{{=it.file}}"
+      }
+    ]
+  },
+  {
+    "id": "ppage_SideMenu",
+    "targets": [
+      {
+        "filename": "Components/_SideMenu.vue",
+        "edittype": "line",
+        "id": "ppage_page_import",
+        "template": "import {{=it.PageName}} from '../ppages/{{=it.PageName}}/{{=it.file}}';"
+      },
+      {
+        "filename": "Components/_SideMenu.vue",
+        "edittype": "line",
+        "id": "ppage_addmenuitem",
+        "template": "this.addMenuItem( { name: '{{=it.PageName}}', title: '{{=it.PageName}}', page: {{=it.PageName}} } );"
+      }
+    ]
+  },
+  {
+    "id": "ppage_SampleUI",
+    "targets": [
+      {
+        "filename": "Pages/_SampleUI.vue",
+        "edittype": "line",
+        "id": "ppage_sample_link",
+        "template": "<v-ons-button @click='navigate_{{=it.PageName}}()'>{{=it.PageName}}</v-ons-button>"
+      },
+      {
+        "filename": "Pages/_SampleUI.vue",
+        "edittype": "line",
+        "id": "ppage_page_import",
+        "template": "import {{=it.PageName}} from '../ppages/{{=it.PageName}}/{{=it.file}}';"
+      },
+      {
+        "filename": "Pages/_SampleUI.vue",
+        "edittype": "line",
+        "id": "ppage_navigate_methods",
+        "template": "navigate_{{=it.PageName}}(){ this.pushPage({{=it.PageName}}); },"
+      }
+    ]
+  }
+]
